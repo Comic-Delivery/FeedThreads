@@ -1,4 +1,4 @@
-class Threader {
+class ThreadHandler {
     constructor(apiBase, authorization) {
         try {
             this.axios = (require('axios')).default.create({
@@ -40,6 +40,15 @@ class Threader {
             console.error(JSON.stringify(reason.response.data));
         })
     }
+
+    crosspostMessage(channel, message) {
+        this.axios.post(`/channels/${channel}/messages/${message}/crosspost`)
+            .then(response => console.log(response.status, `Successfully crossposted message (${response.data.id})`))
+            .catch(reason => {
+                console.error(reason.response.status, `Failed to crosspost`)
+                console.error(JSON.stringify(reason.response.data));
+            })
+    }
 }
 
-module.exports = Threader;
+module.exports = { ThreadHandler };

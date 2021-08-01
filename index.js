@@ -1,6 +1,6 @@
 const EventEmitter = require('events');
-const Feeder = require('./feeder');
-const Threader = require('./threader');
+const { ThreadHandler } = require('./threadHandler');
+const { FeedEvents } = require('feed-events');
 
 class ParameterError extends Error {
     constructor(...params) {
@@ -23,20 +23,24 @@ class FeedThreads extends EventEmitter {
             duration: discordConfig.duration || 60
         }
         let API = `https://discord.com/api/v` + this.discord.version;
-        this.thread = new Threader(API, this.discord.authorization);
+        this.thread = new ThreadHandler(API, this.discord.authorization);
         
         this.rss = {
-            uri: CheckParameter(rssConfig.uri, "Missing RSS URI"),
-            interval: CheckParameter(rssConfig.interval, "Missing RSS Interval"),
+            URL: CheckParameter(rssConfig.URL, "Missing RSS URI"),
+            configuration: rssConfig.configuration || {},
             latest: rssConfig.latest || null
         }        
     }
 
     start() {
-        this.feed = new Feeder(this.rss.uri, this.rss.interval, this.rss.latest);
-        this.feed.on("new", (item) => {
-            this.emit("newItem", item, this.submit.bind(this));
-        })
+        FeedEvents(this.rss.URL, this.rss.configuration, this.rss.latest)
+            .then(feed => {
+                feed.on("item", item => {
+                    this.emit("item", item, this.submit.bind(this));
+                });
+
+                feed.start();
+            })
     }
 
     submit(title, message) {

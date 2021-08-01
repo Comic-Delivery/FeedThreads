@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "description": "Polls an RSS Feed then Publishes it to Discord",
   "main": "index.js",
-  "keywords": ["feed", "threads", "rss", "discord"],
+  "keywords": [
+    "feed",
+    "threads",
+    "rss",
+    "discord"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
     "cron-converter": "^1.0.1",
+    "feed-events": "github:julianwebb/feedevents",
     "rss-parser": "^3.12.0"
   }
 }
