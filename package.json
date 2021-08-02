@@ -1,6 +1,6 @@
 {
   "name": "feedthreads",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Polls an RSS Feed then Publishes it to Discord",
   "main": "index.js",
   "keywords": [
