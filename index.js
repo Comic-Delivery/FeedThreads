@@ -48,7 +48,7 @@ class FeedThreadsHandler extends EventEmitter {
    * @param {Object} messageObject Discord Message Object
    */
   submit(threadTitle, messageObject) {
-    this.thread.postToChannel(this.discord.channel, messageObject)
+    this.thread.postToChannel(this.discord.channelID, messageObject)
       .then(messageID => {
         this.thread.createThreadOnMessage(
           this.discord.channelID,
