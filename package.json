@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "cron-converter": "^1.0.1",
-    "feed-events": "github:julianwebb/feedevents",
+    "feed-events": "github:Comic-Delivery/feedevents",
     "rss-parser": "^3.12.0"
   }
 }
