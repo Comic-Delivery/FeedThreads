@@ -19,7 +19,7 @@ class FeedThreadsHandler extends EventEmitter {
     this.discord = discord;
 
     this.thread = new ThreadHandler(
-      `https://discord.com/api/v` + this.discord.version, 
+      `https://discord.com/api/v` + this.discord.apiVersion, 
       this.discord.authorization);
         
   }
